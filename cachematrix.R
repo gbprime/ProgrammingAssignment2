@@ -9,11 +9,17 @@
 ## 
 ## Created by: Gabriel Becerra
 ## Create on: June 16, 2015
-## Modified on: 
+## Modified on: June 17, 2015
 ## #############################################################################################
 
-# This function creates a special "matrix" object that can cache its inverse.
-# This function stores and returns a list of functions.
+# This function creates a special creates a special "vector", which is really a list containing 
+# a function to: set & get Matrix data and getInverse & setInverse data.
+#
+# This parent function uses the '<<-' operator in order to assign values to certain variables
+# contained in a separate environment (e.g. parent function) by implementing the 
+# lexicographical protocol.
+# 
+# This function returns a list of functions.
 makeCacheMatrix <- function (xMatrix = matrix()) {
   # creating the generic object that will store the inverse of the given matrix.
   inverseMatrix <- NULL;
@@ -63,10 +69,10 @@ cacheSolve <- function(mtx, ...) {
   
   # if the inverse exists, then return it; otherwise, compute it and store it.
   if(!is.null(inverse)) { # inverse is in cache
-    message("Getting cached data...")
+    message("Getting cached data...");
     return(inverse);
-  } else { # inverse hasn't been cached
-    message("Not in cache. Calculating...")
+  } else { # inverse for this matrix hasn't been cached
+    message("Not in cache. Calculating...");
 
     # deep copying the original matrix
     data <- mtx$get();
